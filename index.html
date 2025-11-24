@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DSA Entrückungs-Rechner</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Göttlicher Begleiter</h1>
+      <!-- Auswahl der Gottheit -->
+      <div class="deity-section">
+        <label for="deity">Gottheit:</label>
+        <select id="deity" onchange="updateDeityInfo()">
+          <option value="">-- Wähle eine Gottheit --</option>
+          <option value="Angrosch">Angrosch</option>
+          <option value="Aves">Aves</option>
+          <option value="Boron">Boron</option>
+          <option value="Efferd">Efferd</option>
+          <option value="Firun">Firun</option>
+          <option value="Hesinde">Hesinde</option>
+          <option value="Ifirn">Ifirn</option>
+          <option value="Ingerimm">Ingerimm</option>
+          <option value="Kor">Kor</option>
+          <option value="Nandus">Nandus</option>
+          <option value="Peraine">Peraine</option>
+          <option value="Phex">Phex</option>
+          <option value="Praios">Praios</option>
+          <option value="Rahja">Rahja</option>
+          <option value="Rondra">Rondra</option>
+          <option value="Swafnir">Swafnir</option>
+          <option value="Travia">Travia</option>
+          <option value="Tsa">Tsa</option>
+        </select>
+        <div id="deity-info"></div>
+      </div>
+      <div class="split-container">
+        <div class="left-pane">
+          <h2 class="entruckung-title" onclick="toggleInfo()">
+            Entrückung <span class="info-icon">ℹ️</span>
+          </h2>
+          <div id="entruckung-info" class="info-text">
+            <p>
+              Entrückung ist der rauschhafte Moment, in dem ein Geweihter die
+              göttliche Kraft so intensiv spürt, dass die Welt um ihn verblasst.
+              Hunger, Müdigkeit oder Gefahr werden unwichtig – nur die
+              Gewissheit zählt, Teil eines höheren Plans zu sein. Dieser Zustand
+              schenkt unerschütterliche Zuversicht und mystische Einblicke, doch
+              er macht es schwer, sich auf Alltägliches zu konzentrieren.
+            </p>
+          </div>
+          <!-- Karmapunkte-Eingabe -->
+          <div class="kap-section">
+            <label for="kap">Umgesetzte Karmapunkte (KaP):</label>
+            <button onclick="changeKap(-1)">-</button>
+            <span id="kap-value">0</span>
+            <button onclick="changeKap(1)">+</button>
+          </div>
+          <!-- Zeit-Tracker -->
+          <div class="time-tracker">
+            <div>
+              <label for="worldly-hours">Stunden mit weltlichen Dingen:</label>
+              <button onclick="changeWorldlyHours(-1)">-</button>
+              <span id="worldly-hours-value">0</span>
+              <button onclick="changeWorldlyHours(1)">+</button>
+            </div>
+            <div>
+              <label for="sleep-hours">Schlaf (je 2 Stunden):</label>
+              <button onclick="changeSleepHours(-1)">-</button>
+              <span id="sleep-hours-value">0</span>
+              <button onclick="changeSleepHours(1)">+</button>
+            </div>
+          </div>
+          <!-- Ergebnisse -->
+          <div class="results-section">
+            <h3>Ergebnisse:</h3>
+            <p>
+              <strong>Entrückung:</strong>
+              <span id="entruckung-points">0</span>
+            </p>
+            <p>
+              <strong>Bonus auf Mirakel+ Talente:</strong>
+              <span id="mirakel-bonus">0</span>
+            </p>
+            <p>
+              <strong>Malus auf Mirakel– Talente:</strong>
+              <span id="mirakel-malus">0</span>
+            </p>
+            <p>
+              <strong>Malus auf sonstige Talente:</strong>
+              <span id="other-malus">0</span>
+            </p>
+            <p>
+              <strong>AsP-Regeneration (Zauberer):</strong>
+              <span id="asp-regen">0</span>
+            </p>
+            <div id="special-effects"></div>
+          </div>
+        </div>
+        <div class="right-pane">
+          <h2>Liturgiekenntnisprobe</h2>
+          <!-- Modifikatoren-Checkboxen -->
+          <div class="modifiers-section">
+            <h3>Modifikatoren:</h3>
+            <div>
+              <input
+                type="checkbox"
+                id="emergency"
+                onchange="calculateEntruckung()"
+              />
+              <label for="emergency">Aus einer Notlage heraus (-3)</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="divine-mission"
+                onchange="calculateEntruckung()"
+              />
+              <label for="divine-mission"
+                >Für einen göttlichen Auftrag (bis zu -7)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="selfish-motives"
+                onchange="calculateEntruckung()"
+              />
+              <label for="selfish-motives"
+                >Aus eigensüchtigen Motiven (bis zu +7)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="magical-influence"
+                onchange="calculateEntruckung()"
+              />
+              <label for="magical-influence"
+                >Unter (magischer) Beherrschung/Beeinflussung (+12)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="new-convert"
+                onchange="calculateEntruckung()"
+              />
+              <label for="new-convert"
+                >Frisch konvertierter Geweihter (+3)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="oathbreaker"
+                onchange="calculateEntruckung()"
+              />
+              <label for="oathbreaker"
+                >Geweihter ist Eidbrecher/Frevler (+3/+7)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="consecrated-ground"
+                onchange="calculateEntruckung()"
+              />
+              <label for="consecrated-ground"
+                >Geweihter Boden eines anderen Zwölfgottes (-1)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="shrine"
+                onchange="calculateEntruckung()"
+              />
+              <label for="shrine"
+                >Kapelle/Schrein der eigenen Gottheit (-2)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="temple"
+                onchange="calculateEntruckung()"
+              />
+              <label for="temple">Tempel der eigenen Gottheit (-3)</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="holy-site"
+                onchange="calculateEntruckung()"
+              />
+              <label for="holy-site"
+                >Heiliger Ort der eigenen Gottheit (-4)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="unbelievers"
+                onchange="calculateEntruckung()"
+              />
+              <label for="unbelievers"
+                >Territorium/Gegenwart vieler Ungläubiger (+3)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="other-world"
+                onchange="calculateEntruckung()"
+              />
+              <label for="other-world"
+                >Andere Welt/Globule/Limbus (mindestens +7)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="demonic-territory"
+                onchange="calculateEntruckung()"
+              />
+              <label for="demonic-territory"
+                >Dämonisch verzerrtes Territorium (mindestens +7)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="holy-month"
+                onchange="calculateEntruckung()"
+              />
+              <label for="holy-month"
+                >Monat/Feiertag der eigenen Gottheit (-1/-3)</label
+              >
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="nameless-days"
+                onchange="calculateEntruckung()"
+              />
+              <label for="nameless-days">Namenlose Tage (+7)</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modifiers-section">
+        <h3>Modifikatoren:</h3>
+        <!-- Checkboxen -->
+        <p>
+          <strong>Summe der Modifikationen:</strong>
+          <span id="modifiers-sum">0</span>
+        </p>
+      </div>
+      <!-- Quellenangabe -->
+      <div class="source">
+        <p>Quelle: WdG 243-246</p>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+body {
+    font-family: 'Times New Roman', serif;
+    background-color: #0a0a2a;
+    background-image: url('https://images.unsplash.com/photo-1506318139528-7777bde2296e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    color: #e0d8b0;
+    padding: 20px;
+    margin: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: rgba(20, 20, 50, 0.9);
+    padding: 20px;
+    border: 1px solid #5d4037;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(139, 69, 19, 0.5);
+}
+
+h1, h2, h3 {
+    color: #d4af37;
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.7);
+}
+
+.entruckung-title {
+    cursor: pointer;
+    color: #d4af37;
+}
+
+.entruckung-title:hover {
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.9);
+}
+
+.info-text {
+    display: none;
+    background-color: rgba(249, 241, 230, 0.9);
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #d4af37;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.info-text.show {
+    display: block;
+}
+
+.info-icon {
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+.deity-section, .kap-section, .time-tracker, .modifiers-section, .results-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #d4af37;
+    border-radius: 5px;
+    background-color: rgba(20, 20, 50, 0.7);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+button {
+    background-color: #5d4037;
+    color: #d4af37;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #8b4513;
+}
+
+#deity-info {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgba(249, 241, 230, 0.9);
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #d4af37;
+}
+
+.fluff-text {
+    background-color: rgba(249, 241, 230, 0.9);
+    color: #333;
+    border-left: 4px solid #d4af37;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.source {
+    text-align: right;
+    font-style: italic;
+    color: #d4af37;
+    margin-top: 20px;
+}
+
+.split-container {
+    display: flex;
+    gap: 20px;
+}
+
+.left-pane, .right-pane {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #d4af37;
+    border-radius: 5px;
+    background-color: rgba(20, 20, 50, 0.7);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
